@@ -27,7 +27,7 @@ while true;do
   case "$1" in 
     -h|--help) echo "show help manual"; exit;;
     -t|--table) echo "show directory table ";exit;;
-    -m) echo "commit message is :'$2'";
+    -m) echo "commit message is :$2";
       commit_message="'$2'";
       shift 2;;
     -d|--directory) echo "handle directory:$2";exit;;
