@@ -1,5 +1,5 @@
 #!/bin/sh 
-commit_message="lyy"
+commit_message="'lyy'"
 MAINDIR="$HOME/github/*"
 ###handle args
 ARGS=`getopt -o d:m:,aht -l directory:,all,help,table -- "$@" `
@@ -18,7 +18,7 @@ do
   echo "----------------------------"
   cd $dirname
   git add --all
-  git commit -a -m '$commit_message'
+  git commit -a -m $commit_message
   git push origin master
 done
 }
