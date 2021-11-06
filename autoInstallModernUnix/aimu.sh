@@ -78,8 +78,8 @@ printComma(){
 bat(){
   Command="bat"
   isInstalled
-  zshCommand="alias cat='bat'"
-  zshprefix="cat="
+  zshCommand="alias catp='bat'"
+  zshprefix="catp="
   isConfiged
   printComma
 }
@@ -92,8 +92,8 @@ dust(){
   tar xzvf dust-v0.7.5-x86_64-unknown-linux-gnu.tar.gz
   mv dust-v0.7.5-x86_64-unknown-linux-gnu/dust /usr/bin/dust 
   rm -fr dust-v0.7.5-x86_64-unknown-linux-gnu*
-  zshCommand="alias du='dust'"
-  zshprefix="du="
+  zshCommand="alias dup='dust'"
+  zshprefix="dup="
   isConfiged
   printComma
 }
@@ -107,8 +107,8 @@ duf(){
   go build
   mv duf /usr/bin/duf
   cd .. && rm -fr duf
-  zshCommand="alias df='duf'"
-  zshprefix="df="
+  zshCommand="alias dfp='duf'"
+  zshprefix="dfp="
   isConfiged
   printComma
 }
