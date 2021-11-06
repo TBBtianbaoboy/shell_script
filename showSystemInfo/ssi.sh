@@ -78,7 +78,8 @@ main(){
         aboutBr
         exit;;
       *)
-        echo "argus is necessary";exit 1;;
+        aboutIp
+        exit;;
     esac
   done
 }
