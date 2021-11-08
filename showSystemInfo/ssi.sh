@@ -12,12 +12,17 @@ set -euo pipefail
 #:check script but not execute,below is example.
 #bash -n main.sh
 
-ARGS=`getopt -o nvzkb -l net,vim,zsh,kitty,br -- "$@" `
+ARGS=`getopt -o nvzkbdwo -l net,vim,zsh,kitty,br,speedtest,release,dns,who,online -- "$@" `
 ### 作用于参数使用错误时
 if [ $? != 0 ];then
   echo "Usage help: ssi -h" >&2;exit 1;
 fi
 eval set -- "$ARGS"
+
+RED='\033[0;31m' #Red Color 
+GREEN='\033[0;32m' #Green Color 
+YELLOW='\033[1;33m' #Yellow Color 
+NC='\033[0m' # No Color
 
 checkNetworkStatus(){
   STATUS=$(nmcli -t -f STATE general)
@@ -59,6 +64,57 @@ aboutZsh(){
   nvim $HOME/.zshrc
 }
 
+aboutSpeedTest(){
+  #wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
+  #chmod +x speedtest-cli 
+  #sudo mv speedtest-cli ~/bin/speedtestcli
+  speedtestcli --share --bytes
+}
+
+CommandAbslPath=
+# update:this function can be replaced by command
+findCommand(){
+  IFS=":"
+  binArr=($PATH)
+  for binDir in ${binArr[@]};do
+    if [ ! -d $binDir ];then 
+      continue
+    fi
+    result=$(find $binDir -name $Command)
+    if [[ $result != "" ]];then 
+      CommandAbslPath=$result
+      break
+    fi
+  done
+}
+
+aboutRelease(){
+  Command="lsb_release"
+  findCommand
+  if [[ $CommandAbslPath == "" ]];then
+    echo -e "${RED}缺失相应配置，正在加载...${NC}"
+    sudo -u root zsh -c 'dnf install -y redhat-lsb-core' >/dev/null
+  fi 
+  releaseResult=$(lsb_release -a | awk 'NR==1 || NR==3 {print $0}')
+  echo $releaseResult
+}
+
+aboutDns(){
+  nameServer=$(cat /etc/resolv.conf | awk '/^nameserver/ {print $2}')
+  echo -e "DNS: ${GREEN}$nameServer"
+}
+
+aboutWho(){
+  me=$(whoami)
+  privilegeMessage=$(sudo -u root zsh -c "cat /etc/sudoers" | awk '/^'$me'/ {print $0}')
+  echo -e "Who: ${GREEN}$me${NC}"
+  echo -e "Privilege: ${GREEN}$privilegeMessage${NC}"
+}
+
+aboutOnline(){
+  who
+}
+
 main(){
   while true;do
     case "$1" in 
@@ -76,6 +132,21 @@ main(){
         exit;;
       -b|--br)
         aboutBr
+        exit;;
+      --speedtest)
+        aboutSpeedTest
+        exit;;
+      --release)
+        aboutRelease
+        exit;;
+      -d|--dns)
+        aboutDns
+        exit;;
+      -w|--who)
+        aboutWho
+        exit;;
+      -o|--online)
+        aboutOnline
         exit;;
       *)
         aboutIp
