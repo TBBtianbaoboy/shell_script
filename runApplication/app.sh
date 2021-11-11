@@ -16,10 +16,24 @@ runMusic(){
   music
 }
 
+runContainerMoniter(){
+  sudo -u root zsh -c "/home/aico/bin/ctop" 
+}
+
+runTerminal(){
+  coco
+}
+
 main(){
   case $1 in 
     music)
       runMusic
+      exit;;
+    ctop)
+      runContainerMoniter
+      exit;;
+    coco)
+      runTerminal
       exit;;
   esac 
 }
