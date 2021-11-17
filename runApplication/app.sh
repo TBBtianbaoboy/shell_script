@@ -24,6 +24,10 @@ runTerminal(){
   coco
 }
 
+runEmoj(){
+  emoj
+}
+
 main(){
   case $1 in 
     music)
@@ -34,6 +38,9 @@ main(){
       exit;;
     coco)
       runTerminal
+      exit;;
+    emoj)
+      runEmoj
       exit;;
   esac 
 }
