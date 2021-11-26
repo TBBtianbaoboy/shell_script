@@ -28,6 +28,10 @@ runEmoj(){
   emoj
 }
 
+openFileServer(){
+  python3 -m http.server 7777
+}
+
 main(){
   case $1 in 
     music)
@@ -41,6 +45,9 @@ main(){
       exit;;
     emoj)
       runEmoj
+      exit;;
+    file)
+      openFileServer
       exit;;
   esac 
 }
