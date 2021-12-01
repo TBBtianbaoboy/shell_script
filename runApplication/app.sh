@@ -32,6 +32,14 @@ openFileServer(){
   python3 -m http.server 7777
 }
 
+openWifi(){
+  nmcli radio wifi on
+}
+
+closeWifi(){
+  nmcli radio wifi off
+}
+
 main(){
   case $1 in 
     music)
@@ -49,6 +57,12 @@ main(){
     file)
       openFileServer
       exit;;
-  esac 
+    openwifi)
+      openWifi
+      exit;;
+    closeWifi)
+      closeWifi
+      exit;;
+  esac
 }
 main $@
