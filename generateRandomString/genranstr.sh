@@ -1,5 +1,5 @@
 #!/bin/sh 
-Strs="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+Strs="0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz;.,"
 length=$1
 if [ "$length" = "" ];then
   length="10"
