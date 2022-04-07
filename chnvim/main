@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+NvimPath="${HOME}/.config"
+NvimFilePath="${HOME}/.local/share"
+NvimToggle ()
+{
+    if [[ -d ${NvimPath}/nvim_coc ]]; then
+        mv ${NvimPath}/nvim ${NvimPath}/nvim_cmp
+        mv ${NvimFilePath}/nvim ${NvimFilePath}/nvim_cmp
+        mv ${NvimPath}/nvim_coc ${NvimPath}/nvim
+        mv ${NvimFilePath}/nvim_coc ${NvimFilePath}/nvim
+        echo "Nvim-Coc"
+    else
+        mv ${NvimPath}/nvim ${NvimPath}/nvim_coc
+        mv ${NvimFilePath}/nvim ${NvimFilePath}/nvim_coc
+        mv ${NvimPath}/nvim_cmp ${NvimPath}/nvim
+        mv ${NvimFilePath}/nvim_cmp ${NvimFilePath}/nvim
+        echo "Nvim-Cmp"
+    fi
+}
+
+main ()
+{
+    NvimToggle
+}
+main $@
