@@ -17,7 +17,7 @@ NvimToggle ()
         mv ${NvimPath}/nvim_cmp ${NvimPath}/nvim
         mv ${NvimFilePath}/nvim_cmp ${NvimFilePath}/nvim
         echo "Nvim-Cmp"
-    fi
+fi
 }
 
 main ()
