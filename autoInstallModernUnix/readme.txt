@@ -1,4 +1,4 @@
-                                                fedora 自动安装userful tools and config all
+fedora install userful tools and config all automatically
 #1---------------------------------official site 
 https://github.com/sharkdp/bat
 
